@@ -74,22 +74,22 @@ export const Modal: React.FC<ModalProps> = ({
         {/* Modal Header */}
         <div
           style={{
-            padding: '1.25rem 1.5rem',
+            padding: '1rem 1.25rem',
             borderBottom: '1px solid var(--border-light)',
             display: 'flex',
-            alignItems: 'flex-start',
+            alignItems: 'center',
             justifyContent: 'space-between',
             gap: '1rem'
           }}
         >
           <div>
-            <h3 style={{ fontSize: '1.15rem', color: 'var(--neutral-900)', margin: 0 }}>{title}</h3>
-            {subtitle && <p style={{ fontSize: '0.825rem', color: 'var(--neutral-500)', marginTop: '4px' }}>{subtitle}</p>}
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--neutral-900)', margin: 0 }}>{title}</h3>
+            {subtitle && <p style={{ fontSize: '0.775rem', color: 'var(--neutral-500)', marginTop: '2px', margin: 0 }}>{subtitle}</p>}
           </div>
           <button
             onClick={onClose}
             className="btn-icon"
-            style={{ padding: '6px', borderRadius: 'var(--radius-sm)' }}
+            style={{ padding: '4px', borderRadius: 'var(--radius-sm)' }}
             aria-label="Close dialog"
           >
             <X size={18} />
@@ -99,7 +99,7 @@ export const Modal: React.FC<ModalProps> = ({
         {/* Modal Body */}
         <div
           style={{
-            padding: '1.5rem',
+            padding: '1.15rem 1.25rem',
             overflowY: 'auto',
             flex: 1
           }}
@@ -111,13 +111,13 @@ export const Modal: React.FC<ModalProps> = ({
         {footer && (
           <div
             style={{
-              padding: '1rem 1.5rem',
+              padding: '0.85rem 1.25rem',
               borderTop: '1px solid var(--border-light)',
               backgroundColor: 'var(--neutral-50)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-end',
-              gap: '0.75rem'
+              gap: '0.65rem'
             }}
           >
             {footer}

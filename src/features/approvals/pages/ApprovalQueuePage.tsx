@@ -223,19 +223,19 @@ export const ApprovalQueuePage: React.FC = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                   <User size={18} color="var(--tertiary-500)" />
                   <div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--neutral-500)', textTransform: 'uppercase', fontWeight: 600 }}>Requestor</div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--neutral-500)', textTransform: 'uppercase', fontWeight: 600 }}>Requester</div>
                     <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--neutral-800)' }}>{resv.userName} ({resv.userRole})</div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--neutral-500)' }}>{resv.department} • {resv.attendeesCount} pax</div>
                   </div>
                 </div>
               </div>
 
-              {/* Special Notes from Requestor */}
+              {/* Special Notes from Requester */}
               {resv.notes && (
                 <div style={{ padding: '0.75rem 1rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', backgroundColor: '#ffffff', display: 'flex', gap: '0.65rem', alignItems: 'flex-start' }}>
                   <MessageSquare size={16} color="var(--neutral-400)" style={{ marginTop: '2px', flexShrink: 0 }} />
                   <div>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--neutral-700)' }}>Requestor's Special Instructions:</div>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--neutral-700)' }}>Requester's Special Instructions:</div>
                     <div style={{ fontSize: '0.825rem', color: 'var(--neutral-600)', marginTop: '2px' }}>{resv.notes}</div>
                   </div>
                 </div>

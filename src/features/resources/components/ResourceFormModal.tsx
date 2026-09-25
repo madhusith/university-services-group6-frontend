@@ -147,13 +147,13 @@ export const ResourceFormModal: React.FC<ResourceFormModalProps> = ({
       onClose={onClose}
       title={isEditing ? `Edit Resource: ${initialData.name}` : 'Create New Resource'}
       subtitle={isEditing ? 'Modify resource attributes and capacity' : 'Add bookable room, lab workstation, or equipment'}
-      maxWidth="680px"
+      maxWidth="600px"
       footer={
         <>
-          <Button variant="outline" onClick={onClose} disabled={isLoading}>
+          <Button variant="outline" size="sm" onClick={onClose} disabled={isLoading}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleSubmit} isLoading={isLoading}>
+          <Button variant="primary" size="sm" onClick={handleSubmit} isLoading={isLoading}>
             {isEditing ? 'Save Changes' : 'Create Resource'}
           </Button>
         </>

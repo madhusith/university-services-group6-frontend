@@ -28,7 +28,7 @@ export const ReservationDetailModal: React.FC<ReservationDetailModalProps> = ({
       onClose={onClose}
       title={`Reservation ${reservation.reservationNumber}`}
       subtitle={`${reservation.resourceName} • ${reservation.facilityName}`}
-      maxWidth="640px"
+      maxWidth="580px"
       footer={
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
           <div>
@@ -42,7 +42,7 @@ export const ReservationDetailModal: React.FC<ReservationDetailModalProps> = ({
               </Button>
             )}
           </div>
-          <Button variant="outline" onClick={onClose}>
+          <Button variant="outline" size="sm" onClick={onClose}>
             Close
           </Button>
         </div>
@@ -89,10 +89,10 @@ export const ReservationDetailModal: React.FC<ReservationDetailModalProps> = ({
           </div>
         </div>
 
-        {/* Requestor Info */}
+        {/* Requester Info */}
         <div style={{ padding: '0.85rem 1rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)' }}>
           <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--neutral-700)', marginBottom: '0.4rem' }}>
-            Requestor Details
+            Requester Details
           </div>
           <div className="grid-2" style={{ fontSize: '0.825rem', color: 'var(--neutral-600)' }}>
             <div>Name: <strong>{reservation.userName}</strong> ({reservation.userRole})</div>

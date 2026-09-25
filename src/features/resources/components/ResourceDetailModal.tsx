@@ -30,7 +30,7 @@ export const ResourceDetailModal: React.FC<ResourceDetailModalProps> = ({
       onClose={onClose}
       title={resource.name}
       subtitle={`Code: ${resource.code} • Facility: ${resource.facilityName}`}
-      maxWidth="680px"
+      maxWidth="580px"
       footer={
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
           <div>
@@ -41,16 +41,17 @@ export const ResourceDetailModal: React.FC<ResourceDetailModalProps> = ({
             )}
           </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <Button variant="outline" onClick={onClose}>
+            <Button variant="outline" size="sm" onClick={onClose}>
               Close
             </Button>
             {onReserve && resource.status === 'AVAILABLE' && (
               <Button
                 variant="primary"
-                leftIcon={<CalendarPlus size={16} />}
+                size="sm"
+                leftIcon={<CalendarPlus size={15} />}
                 onClick={() => onReserve(resource)}
               >
-                Book This Resource
+                Book Resource
               </Button>
             )}
           </div>

@@ -35,7 +35,7 @@ export const FacilityDetailModal: React.FC<FacilityDetailModalProps> = ({
       onClose={onClose}
       title={facility.name}
       subtitle={`Code: ${facility.code} • Building: ${facility.building}`}
-      maxWidth="780px"
+      maxWidth="660px"
       footer={
         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
           <div>
@@ -45,16 +45,16 @@ export const FacilityDetailModal: React.FC<FacilityDetailModalProps> = ({
                 size="sm"
                 onClick={() => onToggleStatus(facility)}
               >
-                {facility.status === 'ACTIVE' ? 'Deactivate Facility' : 'Activate Facility'}
+                {facility.status === 'ACTIVE' ? 'Deactivate' : 'Activate'}
               </Button>
             )}
           </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <Button variant="outline" onClick={onClose}>
+            <Button variant="outline" size="sm" onClick={onClose}>
               Close
             </Button>
             {canManage && onEdit && (
-              <Button variant="primary" onClick={() => onEdit(facility)}>
+              <Button variant="primary" size="sm" onClick={() => onEdit(facility)}>
                 Edit Facility
               </Button>
             )}

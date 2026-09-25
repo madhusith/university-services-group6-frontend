@@ -9,7 +9,7 @@ import { resourceService } from '../../../services/resourceService';
 import { facilityService } from '../../../services/facilityService';
 import { useAuth } from '../../../context/AuthContext';
 import { useToast } from '../../../context/ToastContext';
-import { Calendar, Clock, Users, ShieldAlert, CheckCircle } from 'lucide-react';
+import { ShieldAlert, CheckCircle2 } from 'lucide-react';
 
 interface ReservationFormModalProps {
   isOpen: boolean;
@@ -35,7 +35,6 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
 
   const [resources, setResources] = useState<Resource[]>([]);
   const [facilities, setFacilities] = useState<Facility[]>([]);
-  const [isLoadingMeta, setIsLoadingMeta] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Form fields
@@ -52,7 +51,6 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
   useEffect(() => {
     if (isOpen) {
       const loadOptions = async () => {
-        setIsLoadingMeta(true);
         try {
           const [facs, ress] = await Promise.all([
             facilityService.getAllFacilities(),
@@ -77,8 +75,6 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
           setFormErrors({});
         } catch (err: any) {
           console.error(err);
-        } finally {
-          setIsLoadingMeta(false);
         }
       };
       loadOptions();
@@ -91,34 +87,34 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
     const errs: Record<string, string> = {};
 
     if (!selectedResourceId) {
-      errs.resource = 'Please select a resource to reserve';
+      errs.resource = 'Please select a resource';
     }
 
     if (!date) {
-      errs.date = 'Reservation date is required';
+      errs.date = 'Date is required';
     } else {
       const today = new Date().toISOString().split('T')[0];
       if (date < today) {
-        errs.date = 'Cannot reserve dates in the past';
+        errs.date = 'Cannot reserve past dates';
       }
     }
 
     if (!startTime || !endTime) {
-      errs.time = 'Both start and end time are required';
+      errs.time = 'Start and end times are required';
     } else if (startTime >= endTime) {
-      errs.time = 'End time must be later than start time';
+      errs.time = 'End time must be after start time';
     }
 
     if (!purpose.trim()) {
-      errs.purpose = 'Purpose of reservation is required';
-    } else if (purpose.trim().length < 5) {
-      errs.purpose = 'Please provide a clear description (at least 5 characters)';
+      errs.purpose = 'Purpose is required';
+    } else if (purpose.trim().length < 3) {
+      errs.purpose = 'Please provide a valid purpose';
     }
 
     if (!attendeesCount || attendeesCount <= 0) {
-      errs.attendees = 'Attendee count must be at least 1';
+      errs.attendees = 'Attendees must be at least 1';
     } else if (activeResource && activeResource.capacity > 0 && attendeesCount > activeResource.capacity) {
-      errs.attendees = `Attendees (${attendeesCount}) exceed resource capacity (${activeResource.capacity})`;
+      errs.attendees = `Capacity limit is ${activeResource.capacity} persons`;
     }
 
     setFormErrors(errs);
@@ -134,12 +130,12 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
       const input: CreateReservationInput = {
         resourceId: activeResource.id,
         facilityId: activeResource.facilityId,
-        purpose,
+        purpose: purpose.trim(),
         attendeesCount,
         date,
         startTime,
         endTime,
-        notes
+        notes: notes.trim()
       };
 
       const result = await reservationService.createReservation(input, {
@@ -151,21 +147,20 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
       });
 
       if (result.status === 'CONFIRMED') {
-        success('Reservation Confirmed!', `Booking ${result.reservationNumber} has been automatically confirmed.`);
+        success('Reservation Confirmed', `Booking ${result.reservationNumber} is confirmed.`);
       } else {
-        success('Request Submitted for Approval', `Booking ${result.reservationNumber} is pending Facility Manager review.`);
+        success('Submitted for Approval', `Booking ${result.reservationNumber} is pending review.`);
       }
 
       onSuccess?.();
       onClose();
     } catch (err: any) {
-      error('Reservation Failed', err.message);
+      error('Reservation Error', err.message);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Filter available resources by facility
   const filteredResources = selectedFacilityId 
     ? resources.filter(r => r.facilityId === selectedFacilityId)
     : resources;
@@ -174,37 +169,25 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Create Reservation Request"
-      subtitle="Book university lab facilities, seminar halls, and equipment"
-      maxWidth="680px"
+      title="New Reservation"
+      subtitle={`Booking as ${currentUser.name} (${currentUser.role.replace('_', ' ')})`}
+      maxWidth="560px"
       footer={
         <>
-          <Button variant="outline" onClick={onClose} disabled={isSubmitting}>
+          <Button variant="outline" size="sm" onClick={onClose} disabled={isSubmitting}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleSubmit} isLoading={isSubmitting}>
-            Submit Reservation
+          <Button variant="primary" size="sm" onClick={handleSubmit} isLoading={isSubmitting}>
+            Confirm Reservation
           </Button>
         </>
       }
     >
-      <form onSubmit={handleSubmit}>
-        {/* User Card */}
-        <div style={{ padding: '0.85rem 1rem', backgroundColor: 'var(--neutral-50)', borderRadius: 'var(--radius-md)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div>
-            <span style={{ fontSize: '0.725rem', color: 'var(--neutral-500)', textTransform: 'uppercase', fontWeight: 600 }}>Requesting Persona</span>
-            <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--neutral-900)' }}>{currentUser.name} ({currentUser.role.replace('_', ' ')})</div>
-            <div style={{ fontSize: '0.75rem', color: 'var(--neutral-500)' }}>{currentUser.department} • {currentUser.email}</div>
-          </div>
-          <span style={{ fontSize: '0.75rem', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'var(--primary-100)', color: 'var(--primary-800)', fontWeight: 600 }}>
-            {currentUser.studentStaffId}
-          </span>
-        </div>
-
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
         {/* Facility & Resource Selection */}
         <div className="grid-2">
-          <div className="form-group">
-            <label className="form-label">Filter by Facility</label>
+          <div className="form-group" style={{ margin: 0 }}>
+            <label className="form-label">Facility</label>
             <select
               value={selectedFacilityId}
               onChange={(e) => {
@@ -221,10 +204,17 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
             </select>
           </div>
 
-          <div className="form-group">
-            <label className="form-label">
-              Select Bookable Resource <span className="required">*</span>
-            </label>
+          <div className="form-group" style={{ margin: 0 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <label className="form-label">
+                Resource <span className="required">*</span>
+              </label>
+              {activeResource && (
+                <span style={{ fontSize: '0.7rem', color: activeResource.requiresApproval ? 'var(--warning-700)' : 'var(--success-700)', fontWeight: 600 }}>
+                  {activeResource.requiresApproval ? 'Needs Approval' : 'Instant Book'}
+                </span>
+              )}
+            </div>
             <select
               value={selectedResourceId}
               onChange={(e) => setSelectedResourceId(e.target.value)}
@@ -242,33 +232,9 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
           </div>
         </div>
 
-        {/* Resource info callout */}
-        {activeResource && (
-          <div style={{ padding: '0.75rem 1rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-              <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--success-500)' }} />
-              <div>
-                <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--neutral-900)' }}>{activeResource.name}</span>
-                <span style={{ fontSize: '0.75rem', color: 'var(--neutral-500)', marginLeft: '8px' }}>Type: {activeResource.type} • Max Capacity: {activeResource.capacity}</span>
-              </div>
-            </div>
-            {activeResource.requiresApproval ? (
-              <span style={{ fontSize: '0.725rem', color: 'var(--warning-700)', backgroundColor: 'var(--warning-50)', padding: '2px 8px', borderRadius: '4px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <ShieldAlert size={12} />
-                Requires Approval
-              </span>
-            ) : (
-              <span style={{ fontSize: '0.725rem', color: 'var(--success-700)', backgroundColor: 'var(--success-50)', padding: '2px 8px', borderRadius: '4px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <CheckCircle size={12} />
-                Instant Confirm
-              </span>
-            )}
-          </div>
-        )}
-
-        {/* Date and Time */}
+        {/* Date, Start Time, End Time */}
         <div className="grid-3">
-          <div className="form-group">
+          <div className="form-group" style={{ margin: 0 }}>
             <label className="form-label">
               Date <span className="required">*</span>
             </label>
@@ -281,7 +247,7 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
             {formErrors.date && <div className="invalid-feedback">{formErrors.date}</div>}
           </div>
 
-          <div className="form-group">
+          <div className="form-group" style={{ margin: 0 }}>
             <label className="form-label">
               Start Time <span className="required">*</span>
             </label>
@@ -293,7 +259,7 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group" style={{ margin: 0 }}>
             <label className="form-label">
               End Time <span className="required">*</span>
             </label>
@@ -305,13 +271,13 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
             />
           </div>
         </div>
-        {formErrors.time && <div className="invalid-feedback" style={{ marginTop: '-0.75rem', marginBottom: '1rem' }}>{formErrors.time}</div>}
+        {formErrors.time && <div className="invalid-feedback" style={{ marginTop: '-0.4rem' }}>{formErrors.time}</div>}
 
-        {/* Purpose and Attendee Count */}
-        <div className="grid-2">
-          <div className="form-group">
+        {/* Attendees & Purpose */}
+        <div style={{ display: 'grid', gridTemplateColumns: '130px 1fr', gap: '0.85rem' }}>
+          <div className="form-group" style={{ margin: 0 }}>
             <label className="form-label">
-              Attendees Count <span className="required">*</span>
+              Attendees <span className="required">*</span>
             </label>
             <input
               type="number"
@@ -323,13 +289,13 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
             {formErrors.attendees && <div className="invalid-feedback">{formErrors.attendees}</div>}
           </div>
 
-          <div className="form-group">
+          <div className="form-group" style={{ margin: 0 }}>
             <label className="form-label">
-              Purpose / Event Title <span className="required">*</span>
+              Purpose / Title <span className="required">*</span>
             </label>
             <input
               type="text"
-              placeholder="e.g. Project Sprint Meeting / Final Year Demo"
+              placeholder="e.g. Project Review, Workshop, Lecture"
               value={purpose}
               onChange={e => setPurpose(e.target.value)}
               className={`form-control ${formErrors.purpose ? 'is-invalid' : ''}`}
@@ -339,11 +305,11 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
         </div>
 
         {/* Notes */}
-        <div className="form-group">
-          <label className="form-label">Special Equipment or Setup Requirements</label>
-          <textarea
-            rows={2}
-            placeholder="e.g. Need podium microphone, 2 spare power strips, and HDMI connection..."
+        <div className="form-group" style={{ margin: 0 }}>
+          <label className="form-label">Special Requirements (Optional)</label>
+          <input
+            type="text"
+            placeholder="e.g. Projector connection, podium mic..."
             value={notes}
             onChange={e => setNotes(e.target.value)}
             className="form-control"

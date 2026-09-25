@@ -160,13 +160,13 @@ export const FacilityFormModal: React.FC<FacilityFormModalProps> = ({
       onClose={onClose}
       title={isEditing ? `Edit Facility: ${initialData.name}` : 'Create New Facility'}
       subtitle={isEditing ? 'Update facility parameters and specifications' : 'Register a new university facility'}
-      maxWidth="720px"
+      maxWidth="640px"
       footer={
         <>
-          <Button variant="outline" onClick={onClose} disabled={isLoading}>
+          <Button variant="outline" size="sm" onClick={onClose} disabled={isLoading}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleSubmit} isLoading={isLoading}>
+          <Button variant="primary" size="sm" onClick={handleSubmit} isLoading={isLoading}>
             {isEditing ? 'Save Changes' : 'Create Facility'}
           </Button>
         </>
