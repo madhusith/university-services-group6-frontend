@@ -145,7 +145,7 @@ const INITIAL_RESOURCES: Resource[] = [
     specs: ['40x Intel Xeon Workstations', 'NVIDIA RTX 4090 GPUs', 'Dual 4K Color-accurate Displays', 'Local Kubernetes Cluster'],
     hourlyRate: 0,
     description: 'High-spec workstation lab for deep learning training, computer vision projects, and accelerated computing research.',
-    imageUrl: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80',
     createdAt: '2026-08-01T08:30:00Z',
     updatedAt: '2026-09-20T10:00:00Z'
   },
@@ -380,7 +380,26 @@ export const saveFacilities = (facilities: Facility[]): void => {
 export const getStoredResources = (): Resource[] => {
   initializeStorage();
   const data = localStorage.getItem(RESOURCES_KEY);
-  return data ? JSON.parse(data) : [];
+  let resources: Resource[] = data ? JSON.parse(data) : [];
+  
+  // Auto-migrate any broken legacy URLs cached in localStorage
+  let needsSave = false;
+  resources = resources.map(res => {
+    if (res.imageUrl && res.imageUrl.includes('photo-1581092335397-9583fe92d232')) {
+      needsSave = true;
+      return {
+        ...res,
+        imageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'
+      };
+    }
+    return res;
+  });
+
+  if (needsSave) {
+    localStorage.setItem(RESOURCES_KEY, JSON.stringify(resources));
+  }
+
+  return resources;
 };
 
 export const saveResources = (resources: Resource[]): void => {

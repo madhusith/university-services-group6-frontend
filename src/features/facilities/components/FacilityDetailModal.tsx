@@ -68,6 +68,12 @@ export const FacilityDetailModal: React.FC<FacilityDetailModalProps> = ({
           <img
             src={facility.imageUrl || 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80'}
             alt={facility.name}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              if (!target.src.includes('photo-1541339907198-e08756dedf3f')) {
+                target.src = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80';
+              }
+            }}
             style={{
               width: '180px',
               height: '120px',

@@ -62,8 +62,14 @@ export const ResourceDetailModal: React.FC<ResourceDetailModalProps> = ({
         {/* Banner with image and badges */}
         <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
           <img
-            src={resource.imageUrl || 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=80'}
+            src={resource.imageUrl || 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80'}
             alt={resource.name}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              if (!target.src.includes('photo-1581091226825-a6a2a5aee158')) {
+                target.src = 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80';
+              }
+            }}
             style={{
               width: '160px',
               height: '110px',

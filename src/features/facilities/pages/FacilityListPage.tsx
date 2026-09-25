@@ -260,6 +260,12 @@ export const FacilityListPage: React.FC = () => {
                     src={facility.imageUrl || 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80'}
                     alt={facility.name}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (!target.src.includes('photo-1541339907198-e08756dedf3f')) {
+                        target.src = 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80';
+                      }
+                    }}
                   />
                   <div
                     style={{
