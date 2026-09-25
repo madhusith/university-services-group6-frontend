@@ -147,7 +147,6 @@ export const DashboardPage: React.FC = () => {
           subtitle={isManagerOrAdmin ? 'Campus-wide upcoming' : 'Your scheduled slots'}
           icon={<CalendarCheck2 size={22} />}
           colorVariant="primary"
-          trend={{ value: 'USMG6-60', isPositive: true }}
         />
 
         <StatsCard
@@ -156,7 +155,6 @@ export const DashboardPage: React.FC = () => {
           subtitle={isManagerOrAdmin ? 'Requires manager review' : 'Awaiting confirmation'}
           icon={<Clock size={22} />}
           colorVariant={pendingApprovals.length > 0 ? 'warning' : 'secondary'}
-          trend={{ value: 'USMG6-127', isPositive: pendingApprovals.length === 0 }}
         />
       </div>
 
@@ -166,14 +164,9 @@ export const DashboardPage: React.FC = () => {
         <div className="card" style={{ display: 'flex', flexDirection: 'column' }}>
           <div className="card-header">
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--neutral-900)' }}>
-                  Upcoming Reservations
-                </h3>
-                <span style={{ fontSize: '0.65rem', fontWeight: 700, backgroundColor: 'var(--primary-100)', color: 'var(--primary-800)', padding: '2px 6px', borderRadius: '4px' }}>
-                  USMG6-60
-                </span>
-              </div>
+              <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--neutral-900)' }}>
+                Upcoming Reservations
+              </h3>
               <span style={{ fontSize: '0.75rem', color: 'var(--neutral-500)' }}>
                 Excludes past bookings, chronological order
               </span>
@@ -255,14 +248,9 @@ export const DashboardPage: React.FC = () => {
             <div className="card" style={{ borderLeft: '4px solid var(--warning-500)' }}>
               <div className="card-header">
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--neutral-900)' }}>
-                      Pending Approvals
-                    </h3>
-                    <span style={{ fontSize: '0.65rem', fontWeight: 700, backgroundColor: 'var(--warning-100)', color: 'var(--warning-700)', padding: '2px 6px', borderRadius: '4px' }}>
-                      USMG6-127
-                    </span>
-                  </div>
+                  <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--neutral-900)' }}>
+                    Pending Approvals
+                  </h3>
                   <span style={{ fontSize: '0.75rem', color: 'var(--neutral-500)' }}>
                     High-demand resources requiring Facility Manager review
                   </span>

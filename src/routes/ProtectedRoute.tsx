@@ -48,7 +48,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles, ch
         </div>
 
         <h2 style={{ fontSize: '1.4rem', color: 'var(--neutral-900)' }}>
-          Access Restricted (USMG6-61)
+          Access Restricted
         </h2>
 
         <p style={{ fontSize: '0.9rem', color: 'var(--neutral-600)', lineHeight: 1.6, margin: 0 }}>

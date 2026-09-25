@@ -178,11 +178,8 @@ export const CalendarViewPage: React.FC = () => {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div>
             <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>University Reservation Calendar</h1>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, backgroundColor: 'var(--primary-100)', color: 'var(--primary-800)', padding: '2px 8px', borderRadius: '4px' }}>
-              USMG6-54 / 55 / 56
-            </span>
           </div>
           <p style={{ fontSize: '0.875rem', color: 'var(--neutral-500)', marginTop: '4px' }}>
             Unified timeline view of scheduled facility usage, lab workshops, and reservation occupancy.
@@ -270,7 +267,7 @@ export const CalendarViewPage: React.FC = () => {
               className="form-control"
               style={{ width: 'auto', fontSize: '0.825rem', padding: '0.4rem 0.75rem' }}
             >
-              <option value="ALL">All Facilities (USMG6-55)</option>
+              <option value="ALL">All Facilities</option>
               {facilities.map(f => (
                 <option key={f.id} value={f.id}>{f.name}</option>
               ))}
@@ -285,7 +282,7 @@ export const CalendarViewPage: React.FC = () => {
               className="form-control"
               style={{ width: 'auto', fontSize: '0.825rem', padding: '0.4rem 0.75rem' }}
             >
-              <option value="ALL">All Resources (USMG6-54)</option>
+              <option value="ALL">All Resources</option>
               {availableResources.map(r => (
                 <option key={r.id} value={r.id}>{r.name}</option>
               ))}

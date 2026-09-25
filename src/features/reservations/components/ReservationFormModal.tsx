@@ -175,7 +175,7 @@ export const ReservationFormModal: React.FC<ReservationFormModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title="Create Reservation Request"
-      subtitle="Book university lab facilities, seminar halls, and equipment (USMG6-126)"
+      subtitle="Book university lab facilities, seminar halls, and equipment"
       maxWidth="680px"
       footer={
         <>

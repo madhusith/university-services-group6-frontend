@@ -159,7 +159,7 @@ export const FacilityFormModal: React.FC<FacilityFormModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title={isEditing ? `Edit Facility: ${initialData.name}` : 'Create New Facility'}
-      subtitle={isEditing ? 'Update facility parameters and specifications' : 'Register a new university facility (USMG6-122)'}
+      subtitle={isEditing ? 'Update facility parameters and specifications' : 'Register a new university facility'}
       maxWidth="720px"
       footer={
         <>

@@ -112,13 +112,10 @@ export const MyReservationsPage: React.FC = () => {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div>
             <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>
               {isManagerOrAdmin ? 'All Campus Reservations' : 'My Reservations'}
             </h1>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, backgroundColor: 'var(--primary-100)', color: 'var(--primary-800)', padding: '2px 8px', borderRadius: '4px' }}>
-              USMG6-126
-            </span>
           </div>
           <p style={{ fontSize: '0.875rem', color: 'var(--neutral-500)', marginTop: '4px' }}>
             {isManagerOrAdmin

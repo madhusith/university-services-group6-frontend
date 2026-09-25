@@ -21,45 +21,38 @@ export const Sidebar: React.FC = () => {
     {
       to: '/',
       label: 'Dashboard',
-      icon: <LayoutDashboard size={19} />,
-      badge: null
+      icon: <LayoutDashboard size={19} />
     },
     {
       to: '/facilities',
       label: 'Facilities',
-      icon: <Building2 size={19} />,
-      badge: 'USMG6-122'
+      icon: <Building2 size={19} />
     },
     {
       to: '/resources',
       label: 'Resources',
-      icon: <Layers size={19} />,
-      badge: 'USMG6-123'
+      icon: <Layers size={19} />
     },
     {
       to: '/availability',
       label: 'Availability Search',
-      icon: <Search size={19} />,
-      badge: 'USMG6-124'
+      icon: <Search size={19} />
     },
     {
       to: '/reservations',
       label: 'My Reservations',
-      icon: <BookmarkCheck size={19} />,
-      badge: 'USMG6-126'
+      icon: <BookmarkCheck size={19} />
     },
     {
       to: '/approvals',
       label: 'Approval Queue',
       icon: <ClipboardCheck size={19} />,
-      badge: 'USMG6-127',
       isRestricted: !isManagerOrAdmin
     },
     {
       to: '/calendars',
       label: 'Reservation Calendars',
-      icon: <CalendarDays size={19} />,
-      badge: 'USMG6-54'
+      icon: <CalendarDays size={19} />
     }
   ];
 
@@ -111,22 +104,8 @@ export const Sidebar: React.FC = () => {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
               {item.isRestricted && (
-                <span title="Restricted to Managers & Admins (USMG6-61)">
+                <span title="Restricted to Managers & Admins">
                   <Lock size={13} color="var(--neutral-400)" />
-                </span>
-              )}
-              {item.badge && (
-                <span
-                  style={{
-                    fontSize: '0.65rem',
-                    fontWeight: 600,
-                    padding: '2px 5px',
-                    borderRadius: '4px',
-                    backgroundColor: 'var(--neutral-100)',
-                    color: 'var(--neutral-500)'
-                  }}
-                >
-                  {item.badge}
                 </span>
               )}
             </div>

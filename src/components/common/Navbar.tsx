@@ -128,7 +128,7 @@ export const Navbar: React.FC = () => {
               cursor: 'pointer',
               transition: 'all 0.15s ease'
             }}
-            title="Click to switch user role (USMG6-61 RBAC testing)"
+            title="Click to switch user role"
           >
             <Shield size={14} />
             <span>ROLE: {currentUser.role.replace('_', ' ')}</span>
@@ -153,10 +153,10 @@ export const Navbar: React.FC = () => {
             >
               <div style={{ padding: '0.5rem 0.75rem', borderBottom: '1px solid var(--border-light)', marginBottom: '0.25rem' }}>
                 <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--neutral-500)', textTransform: 'uppercase' }}>
-                  Switch Test Persona (RBAC)
+                  Switch Test Persona
                 </div>
                 <div style={{ fontSize: '0.7rem', color: 'var(--neutral-400)', marginTop: '2px' }}>
-                  Simulates permissions for Sprint 4 USMG6-61
+                  Simulates user permissions and role views
                 </div>
               </div>
 

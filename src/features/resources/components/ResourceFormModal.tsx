@@ -146,7 +146,7 @@ export const ResourceFormModal: React.FC<ResourceFormModalProps> = ({
       isOpen={isOpen}
       onClose={onClose}
       title={isEditing ? `Edit Resource: ${initialData.name}` : 'Create New Resource'}
-      subtitle={isEditing ? 'Modify resource attributes and capacity' : 'Add bookable room, lab workstation, or equipment (USMG6-123)'}
+      subtitle={isEditing ? 'Modify resource attributes and capacity' : 'Add bookable room, lab workstation, or equipment'}
       maxWidth="680px"
       footer={
         <>
@@ -283,7 +283,7 @@ export const ResourceFormModal: React.FC<ResourceFormModalProps> = ({
             style={{ width: '18px', height: '18px', cursor: 'pointer', accentColor: 'var(--primary-800)' }}
           />
           <label htmlFor="requiresApprovalCheck" style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--neutral-800)', cursor: 'pointer' }}>
-            Requires Facility Manager Approval (USMG6-127 workflow)
+            Requires Facility Manager Approval
             <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 400, color: 'var(--neutral-500)' }}>
               When enabled, reservations enter a pending approval queue before being confirmed.
             </span>
