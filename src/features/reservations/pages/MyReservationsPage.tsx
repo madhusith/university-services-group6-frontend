@@ -112,15 +112,11 @@ export const MyReservationsPage: React.FC = () => {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <div>
-            <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>
-              {isManagerOrAdmin ? 'All Campus Reservations' : 'My Reservations'}
-            </h1>
-          </div>
+          <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>
+            {isManagerOrAdmin ? 'All Reservations' : 'My Reservations'}
+          </h1>
           <p style={{ fontSize: '0.875rem', color: 'var(--neutral-500)', marginTop: '4px' }}>
-            {isManagerOrAdmin
-              ? 'Comprehensive log of all facility bookings and student/staff reservation requests.'
-              : `Tracking active, confirmed, and pending requests for ${currentUser.name}.`}
+            {isManagerOrAdmin ? 'Manage all campus bookings and requests.' : 'View and track your reservations.'}
           </p>
         </div>
 
@@ -134,15 +130,15 @@ export const MyReservationsPage: React.FC = () => {
       </div>
 
       {/* Tabs and Search Bar */}
-      <div className="card" style={{ padding: '0.85rem 1.25rem', marginBottom: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="card" style={{ padding: '0.75rem 1.25rem', marginBottom: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
           {[
-            { id: 'ALL', label: 'All Bookings' },
+            { id: 'ALL', label: 'All' },
             { id: 'UPCOMING', label: 'Upcoming' },
-            { id: 'PENDING', label: 'Pending Approval' },
+            { id: 'PENDING', label: 'Pending' },
             { id: 'CONFIRMED', label: 'Confirmed' },
-            { id: 'CANCELLED', label: 'Cancelled / Rejected' }
+            { id: 'CANCELLED', label: 'Cancelled' }
           ].map(tab => (
             <button
               key={tab.id}

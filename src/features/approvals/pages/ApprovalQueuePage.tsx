@@ -111,11 +111,9 @@ export const ApprovalQueuePage: React.FC = () => {
     <div className="page-wrapper">
       {/* Header */}
       <div style={{ marginBottom: '1.75rem' }}>
-        <div>
-          <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>Approval & Cancellation Queue</h1>
-        </div>
+        <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>Approvals Queue</h1>
         <p style={{ fontSize: '0.875rem', color: 'var(--neutral-500)', marginTop: '4px' }}>
-          Review high-priority facility reservation requests requiring approval from the facility management office.
+          Review and approve pending booking requests.
         </p>
       </div>
 

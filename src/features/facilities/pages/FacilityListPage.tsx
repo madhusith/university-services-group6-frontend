@@ -126,11 +126,9 @@ export const FacilityListPage: React.FC = () => {
       {/* Page Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <div>
-            <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>Facility Management</h1>
-          </div>
+          <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>Facilities</h1>
           <p style={{ fontSize: '0.875rem', color: 'var(--neutral-500)', marginTop: '4px' }}>
-            Browse university complexes, inspect lab amenities, configure operating hours, and manage availability.
+            Campus buildings, lab complexes, and operating schedules.
           </p>
         </div>
 
@@ -143,18 +141,18 @@ export const FacilityListPage: React.FC = () => {
               setIsFormOpen(true);
             }}
           >
-            Register New Facility
+            Add Facility
           </Button>
         )}
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="card" style={{ padding: '1rem 1.25rem', marginBottom: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '260px' }}>
+      <div className="card" style={{ padding: '0.85rem 1.25rem', marginBottom: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '240px' }}>
           <Search size={18} color="var(--neutral-400)" />
           <input
             type="text"
-            placeholder="Search by facility name, code, building, or location..."
+            placeholder="Search facilities..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="form-control"

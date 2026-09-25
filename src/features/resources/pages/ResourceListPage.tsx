@@ -111,11 +111,9 @@ export const ResourceListPage: React.FC = () => {
       {/* Page Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <div>
-            <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>Resource Management</h1>
-          </div>
+          <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>Resources</h1>
           <p style={{ fontSize: '0.875rem', color: 'var(--neutral-500)', marginTop: '4px' }}>
-            Catalogue of bookable labs, study syndicate rooms, lecture halls, and specialized research equipment.
+            Bookable rooms, labs, auditoriums, and specialized equipment.
           </p>
         </div>
 
@@ -128,18 +126,18 @@ export const ResourceListPage: React.FC = () => {
               setIsFormOpen(true);
             }}
           >
-            Add New Resource
+            Add Resource
           </Button>
         )}
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="card" style={{ padding: '1rem 1.25rem', marginBottom: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '260px' }}>
+      <div className="card" style={{ padding: '0.85rem 1.25rem', marginBottom: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: '240px' }}>
           <Search size={18} color="var(--neutral-400)" />
           <input
             type="text"
-            placeholder="Search by resource name, code, specs, or facility..."
+            placeholder="Search resources..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="form-control"

@@ -89,71 +89,65 @@ export const DashboardPage: React.FC = () => {
         }}
       >
         <div style={{ maxWidth: '640px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'rgba(255, 255, 255, 0.15)', backdropFilter: 'blur(4px)', padding: '4px 12px', borderRadius: 'var(--radius-full)', fontSize: '0.75rem', fontWeight: 600, marginBottom: '0.75rem' }}>
-            <Building2 size={13} />
-            <span>Group 6 Campus Resource Management Engine</span>
-          </div>
-          <h1 style={{ color: '#ffffff', fontSize: '1.85rem', fontWeight: 800, margin: '0 0 0.5rem 0' }}>
-            Welcome back, {currentUser.name}!
+          <h1 style={{ color: '#ffffff', fontSize: '1.75rem', fontWeight: 800, margin: '0 0 0.35rem 0' }}>
+            Welcome back, {currentUser.name.split(' ')[0]}
           </h1>
-          <p style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: '0.925rem', lineHeight: 1.6, margin: 0 }}>
-            {currentUser.department} • Active Role: <strong>{currentUser.role.replace('_', ' ')}</strong>
+          <p style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: '0.875rem', margin: 0 }}>
+            {currentUser.department}
           </p>
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
           <Button
             variant="outline"
-            style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.3)', color: '#ffffff' }}
+            style={{ backgroundColor: 'rgba(255, 255, 255, 0.12)', borderColor: 'rgba(255, 255, 255, 0.35)', color: '#ffffff' }}
             onClick={() => setIsNewBookingOpen(true)}
             leftIcon={<Plus size={16} />}
           >
-            Quick Reservation
+            New Reservation
           </Button>
           <Link to="/availability">
             <Button
               variant="secondary"
               leftIcon={<Search size={16} />}
             >
-              Search Availability
+              Check Availability
             </Button>
           </Link>
         </div>
       </div>
 
       {/* KPI Stats Grid */}
-      <div className="grid-4" style={{ marginBottom: '2rem' }}>
+      <div className="grid-4" style={{ marginBottom: '1.75rem' }}>
         <StatsCard
           title="Active Facilities"
           value={activeFacilitiesCount}
-          subtitle={`Out of ${facilities.length} registered complexes`}
-          icon={<Building2 size={22} />}
+          subtitle={`${facilities.length} registered`}
+          icon={<Building2 size={20} />}
           colorVariant="primary"
-          trend={{ value: `${facilities.length} Total`, isPositive: true }}
         />
 
         <StatsCard
           title="Bookable Resources"
           value={availableResourcesCount}
-          subtitle="Labs, halls & workstations"
-          icon={<Layers size={22} />}
+          subtitle={`${resources.length} available`}
+          icon={<Layers size={20} />}
           colorVariant="secondary"
-          trend={{ value: `${resources.length} Total`, isPositive: true }}
         />
 
         <StatsCard
           title="Upcoming Bookings"
           value={upcomingReservations.length}
-          subtitle={isManagerOrAdmin ? 'Campus-wide upcoming' : 'Your scheduled slots'}
-          icon={<CalendarCheck2 size={22} />}
+          subtitle="Scheduled sessions"
+          icon={<CalendarCheck2 size={20} />}
           colorVariant="primary"
         />
 
         <StatsCard
           title="Pending Approvals"
           value={pendingApprovals.length}
-          subtitle={isManagerOrAdmin ? 'Requires manager review' : 'Awaiting confirmation'}
-          icon={<Clock size={22} />}
+          subtitle="Awaiting review"
+          icon={<Clock size={20} />}
           colorVariant={pendingApprovals.length > 0 ? 'warning' : 'secondary'}
         />
       </div>
@@ -163,14 +157,9 @@ export const DashboardPage: React.FC = () => {
         {/* USMG6-60: Upcoming Reservations Widget */}
         <div className="card" style={{ display: 'flex', flexDirection: 'column' }}>
           <div className="card-header">
-            <div>
-              <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--neutral-900)' }}>
-                Upcoming Reservations
-              </h3>
-              <span style={{ fontSize: '0.75rem', color: 'var(--neutral-500)' }}>
-                Excludes past bookings, chronological order
-              </span>
-            </div>
+            <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--neutral-900)' }}>
+              Upcoming Reservations
+            </h3>
 
             <Link to="/reservations" style={{ fontSize: '0.8rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
               View All <ChevronRight size={14} />
@@ -247,14 +236,9 @@ export const DashboardPage: React.FC = () => {
           {isManagerOrAdmin && (
             <div className="card" style={{ borderLeft: '4px solid var(--warning-500)' }}>
               <div className="card-header">
-                <div>
-                  <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--neutral-900)' }}>
-                    Pending Approvals
-                  </h3>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--neutral-500)' }}>
-                    High-demand resources requiring Facility Manager review
-                  </span>
-                </div>
+                <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--neutral-900)' }}>
+                  Pending Approvals
+                </h3>
 
                 <Link to="/approvals" style={{ fontSize: '0.8rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
                   Queue ({pendingApprovals.length}) <ChevronRight size={14} />
@@ -302,39 +286,35 @@ export const DashboardPage: React.FC = () => {
           <div className="card">
             <div className="card-header">
               <h3 style={{ fontSize: '1.1rem', margin: 0, color: 'var(--neutral-900)' }}>
-                System Quick Links
+                Quick Links
               </h3>
             </div>
             <div className="card-body grid-2">
               <Link to="/availability" style={{ textDecoration: 'none' }}>
-                <div style={{ padding: '0.85rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', transition: 'all 0.15s ease' }}>
-                  <Search size={18} color="var(--primary-800)" style={{ marginBottom: '0.35rem' }} />
-                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--neutral-800)' }}>Live Timetable</div>
-                  <div style={{ fontSize: '0.725rem', color: 'var(--neutral-500)' }}>Search available halls & lab computers</div>
+                <div style={{ padding: '0.85rem 1rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '0.75rem', backgroundColor: '#ffffff', transition: 'all 0.15s ease' }}>
+                  <Search size={18} color="var(--primary-800)" />
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--neutral-800)' }}>Check Availability</div>
                 </div>
               </Link>
 
               <Link to="/calendars" style={{ textDecoration: 'none' }}>
-                <div style={{ padding: '0.85rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', transition: 'all 0.15s ease' }}>
-                  <CalendarDays size={18} color="var(--secondary-700)" style={{ marginBottom: '0.35rem' }} />
-                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--neutral-800)' }}>Master Calendar</div>
-                  <div style={{ fontSize: '0.725rem', color: 'var(--neutral-500)' }}>Month & week reservation schedules</div>
+                <div style={{ padding: '0.85rem 1rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '0.75rem', backgroundColor: '#ffffff', transition: 'all 0.15s ease' }}>
+                  <CalendarDays size={18} color="var(--secondary-700)" />
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--neutral-800)' }}>Master Calendar</div>
                 </div>
               </Link>
 
               <Link to="/facilities" style={{ textDecoration: 'none' }}>
-                <div style={{ padding: '0.85rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', transition: 'all 0.15s ease' }}>
-                  <Building2 size={18} color="var(--tertiary-500)" style={{ marginBottom: '0.35rem' }} />
-                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--neutral-800)' }}>Facility Catalog</div>
-                  <div style={{ fontSize: '0.725rem', color: 'var(--neutral-500)' }}>Buildings, amenities & hours</div>
+                <div style={{ padding: '0.85rem 1rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '0.75rem', backgroundColor: '#ffffff', transition: 'all 0.15s ease' }}>
+                  <Building2 size={18} color="var(--tertiary-500)" />
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--neutral-800)' }}>Campus Facilities</div>
                 </div>
               </Link>
 
               <Link to="/resources" style={{ textDecoration: 'none' }}>
-                <div style={{ padding: '0.85rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', transition: 'all 0.15s ease' }}>
-                  <Layers size={18} color="var(--neutral-700)" style={{ marginBottom: '0.35rem' }} />
-                  <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--neutral-800)' }}>Resource Catalog</div>
-                  <div style={{ fontSize: '0.725rem', color: 'var(--neutral-500)' }}>Specs, capacity & equipment</div>
+                <div style={{ padding: '0.85rem 1rem', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '0.75rem', backgroundColor: '#ffffff', transition: 'all 0.15s ease' }}>
+                  <Layers size={18} color="var(--neutral-700)" />
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--neutral-800)' }}>Resource Catalog</div>
                 </div>
               </Link>
             </div>

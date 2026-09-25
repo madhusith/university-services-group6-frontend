@@ -113,37 +113,6 @@ export const Sidebar: React.FC = () => {
         ))}
       </div>
 
-      {/* Collaboration Team Info Card */}
-      <div
-        className="card"
-        style={{
-          padding: '1rem',
-          backgroundColor: 'var(--neutral-50)',
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid var(--border-light)'
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--neutral-700)' }}>
-            Group 6 Sprint Portal
-          </span>
-          <span
-            style={{
-              fontSize: '0.65rem',
-              fontWeight: 700,
-              color: 'var(--secondary-700)',
-              backgroundColor: 'var(--secondary-100)',
-              padding: '1px 6px',
-              borderRadius: 'var(--radius-full)'
-            }}
-          >
-            Sprint 3 & 4
-          </span>
-        </div>
-        <p style={{ fontSize: '0.725rem', color: 'var(--neutral-500)', marginTop: '0.35rem', lineHeight: 1.4 }}>
-          Shared frontend for University Services Facility & Resource Reservation system.
-        </p>
-      </div>
     </aside>
   );
 };

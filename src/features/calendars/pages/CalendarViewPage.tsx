@@ -178,11 +178,9 @@ export const CalendarViewPage: React.FC = () => {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <div>
-            <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>University Reservation Calendar</h1>
-          </div>
+          <h1 style={{ fontSize: '1.75rem', color: 'var(--neutral-900)' }}>Calendar</h1>
           <p style={{ fontSize: '0.875rem', color: 'var(--neutral-500)', marginTop: '4px' }}>
-            Unified timeline view of scheduled facility usage, lab workshops, and reservation occupancy.
+            Campus schedule and reservation timeline.
           </p>
         </div>
 

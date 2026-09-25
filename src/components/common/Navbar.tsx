@@ -90,7 +90,7 @@ export const Navbar: React.FC = () => {
             </span>
           </div>
           <span style={{ fontSize: '0.75rem', color: 'var(--neutral-500)', display: 'block' }}>
-            Facilities, Resources & Reservation Management
+            Campus Facilities & Reservations
           </span>
         </div>
       </div>
@@ -100,39 +100,39 @@ export const Navbar: React.FC = () => {
         {/* Reset Database Button for Testing */}
         <button
           onClick={handleResetData}
-          title="Reset sample data"
+          title="Reset demo data"
           className="btn-icon"
           style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', color: 'var(--neutral-500)' }}
         >
-          <RefreshCw size={15} />
+          <RefreshCw size={14} />
           <span style={{ display: 'inline-block' }}>Reset Data</span>
         </button>
 
-        <div style={{ height: '24px', width: '1px', backgroundColor: 'var(--neutral-200)' }} />
+        <div style={{ height: '20px', width: '1px', backgroundColor: 'var(--neutral-200)' }} />
 
-        {/* Multi-role Switcher (USMG6-61 demonstration) */}
+        {/* Multi-role Switcher */}
         <div style={{ position: 'relative' }}>
           <button
             onClick={() => setIsRoleDropdownOpen(!isRoleDropdownOpen)}
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.6rem',
-              padding: '0.4rem 0.75rem',
+              gap: '0.5rem',
+              padding: '0.35rem 0.75rem',
               backgroundColor: badgeStyle.bg,
               border: `1px solid ${badgeStyle.border}`,
               borderRadius: 'var(--radius-full)',
               color: badgeStyle.text,
-              fontSize: '0.8rem',
+              fontSize: '0.775rem',
               fontWeight: 700,
               cursor: 'pointer',
               transition: 'all 0.15s ease'
             }}
-            title="Click to switch user role"
+            title="Click to switch persona"
           >
-            <Shield size={14} />
-            <span>ROLE: {currentUser.role.replace('_', ' ')}</span>
-            <ChevronDown size={14} />
+            <Shield size={13} />
+            <span>{currentUser.role.replace('_', ' ')}</span>
+            <ChevronDown size={13} />
           </button>
 
           {isRoleDropdownOpen && (
